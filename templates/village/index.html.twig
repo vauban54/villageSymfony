@@ -1,8 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<img src="/images/IMG_7528-1024x769.jpg" class="img-fluid" with="auto" alt="..." style="background-size: cover;">
-<h1>Accueil</h1>
-{# <header class="text-center text-white " style="background: url(/images/IMG_7528-1024x769.jpg);background-size: cover;">jyed</header> #}
+	{# <img src="/images/IMG_7528-1024x769.jpg" class="img-fluid" with="auto" alt="..." style="background-size: cover;"> #}
 
+	{# <header class="text-center text-white " style="background: url(/images/IMG_7528-1024x769.jpg);background-size: cover;">jyed</header> #}
+		<section class="container" id="photoAccueil" style="background: no-repeat url('../../images/IMG_7528-1024x769.jpg');"> <h1>Accueil</h1>
+	</section>
+	<section class="articles">
+		<h1>Evènements</h1>
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime hic facilis, sit inventore animi repellendus.</p>
+				<p>Doloribus temporibus quam nesciunt reprehenderit aliquam fugiat minima sequi nobis explicabo eaque! Nobis, ea illum.</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel et nam necessitatibus aliquid optio porro!</p>
+				<p>Sint, nisi necessitatibus eaque mollitia sunt praesentium error animi veritatis voluptatem, quasi vero. Laborum, placeat?</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis voluptatibus unde fuga distinctio rerum nam.</p>
+				<p>Veritatis in amet alias facere sapiente consequatur nemo aliquam illo, est asperiores minima dolorum maxime.</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+	</section>
+
+	<hr>
+	<br>
+	<section class="articles">
+		<h1>Actualités</h1>
+		<article class="row align-items-start">
+			<h2>Titre de l'actualité</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime hic facilis, sit inventore animi repellendus.</p>
+				<p>Doloribus temporibus quam nesciunt reprehenderit aliquam fugiat minima sequi nobis explicabo eaque! Nobis, ea illum.</p>
+				<a href="{{ path('actuality_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'actualité</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel et nam necessitatibus aliquid optio porro!</p>
+				<p>Sint, nisi necessitatibus eaque mollitia sunt praesentium error animi veritatis voluptatem, quasi vero. Laborum, placeat?</p>
+				<a href="{{ path('actuality_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'actualité</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis voluptatibus unde fuga distinctio rerum nam.</p>
+				<p>Veritatis in amet alias facere sapiente consequatur nemo aliquam illo, est asperiores minima dolorum maxime.</p>
+				<a href="{{ path('actuality_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+	</section>
 {% endblock %}

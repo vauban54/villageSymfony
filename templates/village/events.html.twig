@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<h1>Evènements</h1>
+	<section class="articles">
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime hic facilis, sit inventore animi repellendus.</p>
+				<p>Doloribus temporibus quam nesciunt reprehenderit aliquam fugiat minima sequi nobis explicabo eaque! Nobis, ea illum.</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel et nam necessitatibus aliquid optio porro!</p>
+				<p>Sint, nisi necessitatibus eaque mollitia sunt praesentium error animi veritatis voluptatem, quasi vero. Laborum, placeat?</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+		<article class="row align-items-start">
+			<h2>Titre de l'évènement</h2>
+			<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+			<div class="content">
+				<img src="http://placehold.it/350x150" alt="">
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis voluptatibus unde fuga distinctio rerum nam.</p>
+				<p>Veritatis in amet alias facere sapiente consequatur nemo aliquam illo, est asperiores minima dolorum maxime.</p>
+				<a href="{{ path('event_show') }}" class="btn btn-primary">Lire la suite</a>
+			</div>
+		</article>
+	</section>
+
+{% endblock %}
