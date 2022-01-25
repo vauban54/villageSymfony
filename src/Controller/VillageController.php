@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Actualite;
+use App\Entity\Evenement;
+use App\Repository\ActualiteRepository;
+use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,9 +16,16 @@ class VillageController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(EvenementRepository $repoEvent, ActualiteRepository $repoActuality): Response
     {
-        return $this->render('village/index.html.twig', []);
+        $evenements = $repoEvent->findAll();
+
+        $actualites = $repoActuality->findAll();
+        return $this->render('village/index.html.twig', [
+            // Je crée les variables correspondante à mes repository
+            'evenements' => $evenements,
+            'actualites' => $actualites
+        ]);
     }
 
     /**
@@ -34,26 +45,38 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/evenements/12", name="event_show")
+     * @Route("/village/evenements/{id}", name="event_show")
      */
-    public function eventShow(): Response
+    public function eventShow(Evenement $evenement): Response
     {
-        return $this->render('village/eventShow.html.twig');
+        return $this->render('village/eventShow.html.twig', [
+            'evenement' => $evenement
+        ]);
+    }
+
+    /**
+     * @Route("/village/new", name="actuality_create")
+     */
+    public function createActuality()
+    {
+        return $this->render('village/createActuality.html.twig');
     }
 
     /**
      * @Route("/village/actualitys", name="actualitys")
      */
-    public function actuality(): Response
+    public function actuality(ActualiteRepository $repo): Response
     {
         return $this->render('village/actualitys.html.twig');
     }
 
     /**
-     * @Route("/village/actualitys/11", name="actuality_show")
+     * @Route("/village/actualitys/{id}", name="actuality_show")
      */
-    public function actualityShow(): Response
+    public function actualityShow(Actualite $actualite): Response
     {
-        return $this->render('village/actualityShow.html.twig');
+        return $this->render('village/actualityShow.html.twig', [
+            'actualite' => $actualite
+        ]);
     }
 }
