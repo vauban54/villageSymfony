@@ -11,7 +11,6 @@ use App\Repository\EvenementRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,8 +46,8 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/newEvenement", name="event_create")
-     * @Route("/village/evenements/{id}/edit", name="event_edit")
+     * @Route("/newEvenement", name="event_create")
+     * @Route("/evenements/{id}/edit", name="event_edit")
      */
     public function createEvenement(Evenement $evenement = null, Request $request, EntityManagerInterface $manager): Response
     {
@@ -83,7 +82,7 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/evenements", name="events")
+     * @Route("/evenements", name="events")
      */
     public function event(EvenementRepository $repoEvent): Response
     {
@@ -94,7 +93,7 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/evenements/{id}", name="event_show")
+     * @Route("/evenements/{id}", name="event_show")
      */
     public function eventShow(Evenement $evenement): Response
     {
@@ -104,8 +103,8 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/newActuality", name="actuality_create")
-     * @Route("/village/actualitys/{id}/edit", name="actuality_edit")
+     * @Route("/newActuality", name="actuality_create")
+     * @Route("/actualitys/{id}/edit", name="actuality_edit")
      */
     public function createActuality(Actualite $actualite = null, Request $request, EntityManagerInterface $manager): Response
     {
@@ -142,7 +141,7 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/actualitys", name="actualitys")
+     * @Route("/actualitys", name="actualitys")
      */
     public function actuality(ActualiteRepository $repoActuality): Response
     {
@@ -153,7 +152,7 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/actualitys/{id}", name="actuality_show")
+     * @Route("/actualitys/{id}", name="actuality_show")
      */
     public function actualityShow(Actualite $actualite): Response
     {

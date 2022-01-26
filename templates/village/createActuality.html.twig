@@ -3,7 +3,6 @@
 {% block body %}
 	{% form_theme formActualite 'bootstrap_4_layout.html.twig' %}
 
-
 	<h1>
 		{% if editMode %}
 			Modification de l'actualité
@@ -13,7 +12,6 @@
 	</h1>
 
 	{{ form_start(formActualite) }}
-
 	{{ form_row(formActualite.title) }}
 	{{ form_row(formActualite.content) }}
 	{{ form_row(formActualite.image) }}
