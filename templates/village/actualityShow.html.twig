@@ -2,16 +2,15 @@
 
 {% block body %}
 	<article class="row align-items-start">
-		<h2>Titre de l'actualité</h2>
-		<div class="metadata">Ecrit le 10/05/2018 à 19:00 dans la catégorie Politique</div>
+		<h2>{{ actualite.title }}</h2>
+		<div class="metadata">Ecrit le
+			{{ actualite.createdAt | date('d/m/Y') }}
+			à
+			{{ actualite.createdAt | date('H:i') }}
+		</div>
 		<div class="content">
-			<img src="http://placehold.it/350x150" alt="">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime hic facilis, sit inventore animi repellendus.</p>
-			<p>Doloribus temporibus quam nesciunt reprehenderit aliquam fugiat minima sequi nobis explicabo eaque! Nobis, ea illum.</p>
-			<hr>
-			<br>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic tempore in sequi id. At sit eligendi eaque quo, dolorem laboriosam corporis. Minus molestiae quod laudantium porro amet, explicabo possimus tempora voluptatum suscipit consequatur, id exercitationem similique? Obcaecati nisi, quasi rem ducimus molestiae quam facilis totam minima quae, quos eveniet magni.</p>
-			<p>Modi delectus minus, corrupti soluta nobis voluptate! Eveniet cumque odit, quae nisi dignissimos velit explicabo, veniam laborum quidem nihil exercitationem culpa, ducimus cum quibusdam blanditiis beatae quis commodi corrupti provident nemo debitis dolorum odio? Natus aut provident recusandae ea vel cumque est eum adipisci, consectetur eius quae maiores tempore illo?</p>
+			<img src="{{ actualite.image }}" alt="">
+			<p>{{ actualite.content }}</p>
 		</div>
 	</article>
 {% endblock %}

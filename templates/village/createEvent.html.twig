@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{% form_theme formEvenement 'bootstrap_4_layout.html.twig' %}
+
+	<h1>
+		{% if editModeEvent %}
+			Modification de l'évènement
+		{% else %}
+			Création d'une évènement !
+		{% endif %}
+	</h1>
+
+	{{ form_start(formEvenement) }}
+
+	{{ form_row(formEvenement.title) }}
+	{{ form_row(formEvenement.content) }}
+	{{ form_row(formEvenement.image) }}
+	<br>
+	<button type="submit" class="btn btn-primary">
+		{% if editModeEvent %}
+			Modifier l'évènement
+		{% else %}
+			Enregistrer l'évènement
+		{% endif %}
+	</button>
+	{{ form_end(formEvenement) }}
+
+
+{% endblock %}

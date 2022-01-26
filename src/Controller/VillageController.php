@@ -4,10 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Actualite;
 use App\Entity\Evenement;
+use App\Form\ActualityType;
+use App\Form\EventType;
 use App\Repository\ActualiteRepository;
 use App\Repository\EvenementRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Routing\Annotation\Route;
 
 class VillageController extends AbstractController
@@ -37,11 +47,50 @@ class VillageController extends AbstractController
     }
 
     /**
+     * @Route("/village/newEvenement", name="event_create")
+     * @Route("/village/evenements/{id}/edit", name="event_edit")
+     */
+    public function createEvenement(Evenement $evenement = null, Request $request, EntityManagerInterface $manager): Response
+    {
+        if (!$evenement) {
+            $evenement = new Evenement();
+        }
+
+        $formEvenement = $this->createForm(EventType::class, $evenement);
+
+        $formEvenement->handleRequest($request);
+
+        // On vérifier que le form est soumettable et valide
+        if ($formEvenement->isSubmitted() && $formEvenement->isValid()) {
+            if (!$evenement->getId()) {
+                $evenement->setCreatedAt(new DateTime());
+            }
+
+            $manager->persist($evenement);
+            $manager->flush();
+
+            return $this->redirectToRoute('event_show', [
+                'id' => $evenement->getId()
+            ]);
+        }
+
+        dump($evenement);
+
+        return $this->render('village/createEvent.html.twig', [
+            'formEvenement' => $formEvenement->createView(),
+            'editModeEvent' => $evenement->getId() !== null
+        ]);
+    }
+
+    /**
      * @Route("/village/evenements", name="events")
      */
-    public function event(): Response
+    public function event(EvenementRepository $repoEvent): Response
     {
-        return $this->render('village/events.html.twig');
+        $evenements = $repoEvent->findAll();
+        return $this->render('village/events.html.twig', [
+            'evenements' => $evenements
+        ]);
     }
 
     /**
@@ -55,19 +104,52 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/village/new", name="actuality_create")
+     * @Route("/village/newActuality", name="actuality_create")
+     * @Route("/village/actualitys/{id}/edit", name="actuality_edit")
      */
-    public function createActuality()
+    public function createActuality(Actualite $actualite = null, Request $request, EntityManagerInterface $manager): Response
     {
-        return $this->render('village/createActuality.html.twig');
+        if (!$actualite) {
+            $actualite = new Actualite();
+        }
+
+
+        $formActualite = $this->createForm(ActualityType::class, $actualite);
+
+
+        $formActualite->handleRequest($request);
+
+        // On vérifier que le form est soumettable et valide
+        if ($formActualite->isSubmitted() && $formActualite->isValid()) {
+            if (!$actualite->getId()) {
+                $actualite->setCreatedAt(new DateTime());
+            }
+
+            $manager->persist($actualite);
+            $manager->flush();
+
+            return $this->redirectToRoute('actuality_show', [
+                'id' => $actualite->getId()
+            ]);
+        }
+
+        dump($actualite);
+
+        return $this->render('village/createActuality.html.twig', [
+            'formActualite' => $formActualite->createView(),
+            'editMode' => $actualite->getId() !== null
+        ]);
     }
 
     /**
      * @Route("/village/actualitys", name="actualitys")
      */
-    public function actuality(ActualiteRepository $repo): Response
+    public function actuality(ActualiteRepository $repoActuality): Response
     {
-        return $this->render('village/actualitys.html.twig');
+        $actualites = $repoActuality->findAll();
+        return $this->render('village/actualitys.html.twig', [
+            'actualites' => $actualites
+        ]);
     }
 
     /**

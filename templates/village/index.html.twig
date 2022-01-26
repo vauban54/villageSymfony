@@ -22,6 +22,7 @@
 					<img src="{{ evenement.image }}" alt="">
 					<p>{{ evenement.content }}</p>
 					<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>
+					<a href="{{ path('event_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier l'évènement</a>
 				</div>
 			</article>
 		{% endfor %}
@@ -46,6 +47,7 @@
 					<img src="{{ actualite.image }}" alt="">
 					<p>{{ actualite.content }}</p>
 					<a href="{{ path('actuality_show', {'id': actualite.id}) }}" class="btn btn-primary">Lire la suite</a>
+					<a href="{{ path('actuality_edit', {'id': actualite.id}) }}" class="btn btn-primary">Modifier l'actualité</a>
 				</div>
 			</article>
 		{% endfor %}
