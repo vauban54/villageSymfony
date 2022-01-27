@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Actualite;
+use App\Entity\Contact;
 use App\Entity\Evenement;
 use App\Form\ActualityType;
+use App\Form\ContactType;
 use App\Form\EventType;
 use App\Repository\ActualiteRepository;
+use App\Repository\ContactRepository;
 use App\Repository\EvenementRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Flex\Response as FlexResponse;
 
 class VillageController extends AbstractController
 {
@@ -103,6 +107,19 @@ class VillageController extends AbstractController
     }
 
     /**
+     * @Route("/evenements/{id}/remove", name="event_remove")
+     */
+    public function eventRemove(Evenement $evenement, EntityManagerInterface $manager): Response
+    {
+
+        // On supprime l'évènement
+        $manager->remove($evenement);
+        $manager->flush();
+
+        return $this->render('village/eventRemove.html.twig');
+    }
+
+    /**
      * @Route("/newActuality", name="actuality_create")
      * @Route("/actualitys/{id}/edit", name="actuality_edit")
      */
@@ -159,5 +176,84 @@ class VillageController extends AbstractController
         return $this->render('village/actualityShow.html.twig', [
             'actualite' => $actualite
         ]);
+    }
+
+    /**
+     * @Route("/actualitys/{id}/remove", name="actuality_remove")
+     */
+    public function actualityRemove(Actualite $actualite, EntityManagerInterface $manager): Response
+    {
+        //On supprime l'actualité
+        $manager->remove($actualite);
+        $manager->flush();
+
+        return $this->render('village/actualityRemove.html.twig');
+    }
+
+    /**
+     * @Route("/takeContact", name="contact_create")
+     * @Route("/contact/{id}/edit", name="contact_edit")
+     */
+    public function takeContact(Contact $contact = null, Request $request, EntityManagerInterface $manager): Response
+    {
+        if (!$contact) {
+            $contact = new Contact();
+        }
+
+        $formContact = $this->createForm(ContactType::class, $contact);
+
+        $formContact->handleRequest($request);
+
+        // On vérifier que le form est soumettable et valide
+        if ($formContact->isSubmitted() && $formContact->isValid()) {
+
+            if (!$contact->getId()) {
+                $contact->setCreatedAt(new DateTime());
+            }
+            $manager->persist($contact);
+            $manager->flush();
+
+            return $this->redirectToRoute('contact_show', [
+                'id' => $contact->getId()
+            ]);
+        }
+
+        dump($contact);
+
+        return $this->render('village/takeContact.html.twig', [
+            'formContact' => $formContact->createView(),
+            'editModeContact' => $contact->getId() !== null
+        ]);
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(ContactRepository $repoContact): Response
+    {
+        $contacts = $repoContact->findAll();
+        return $this->render('village/contact.html.twig', [
+            'contacts' => $contacts
+        ]);
+    }
+
+    /**
+     * @Route("/contact/{id}", name="contact_show")
+     */
+    public function contactShow(Contact $contact): Response
+    {
+        return $this->render('village/contactShow.html.twig', [
+            'contact' => $contact
+        ]);
+    }
+
+    /**
+     * @Route("/contact/{id}/remove", name="contact_remove")
+     */
+    public function contactRemove(Contact $contact, EntityManagerInterface $manager): Response
+    {
+        $manager->remove($contact);
+        $manager->flush();
+        return $this->render('village/contactRemove.html.twig');
     }
 }

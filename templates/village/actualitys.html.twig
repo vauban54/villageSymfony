@@ -7,15 +7,15 @@
 		<article class="row align-items-start">
 			<h2>{{ actualite.title }}</h2>
 			<div class="metadata">Ecrit le
-				{{ actualite.createdAt | date('d/m/Y') }}
-				à
-				{{ actualite.createdAt | date('H:i') }}
+				{{ actualite.createdAt | date('d/m/Y à H:i') }}
 			</div>
 			<div class="content">
 				<img src="{{ actualite.image }}" alt="">
 				<p>{{ actualite.content }}</p>
 				<a href="{{ path('actuality_show', {'id': actualite.id}) }}" class="btn btn-primary">Lire la suite</a>
 				<a href="{{ path('actuality_edit', {'id': actualite.id}) }}" class="btn btn-primary">Modifier l'actualité</a>
+				<a href="{{ path('actuality_remove', {'id': actualite.id}) }}" class="btn btn-danger">Supprimer l'actualité</a>
+
 			</div>
 		</article>
 	{% endfor %}

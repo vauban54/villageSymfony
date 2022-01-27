@@ -25,7 +25,7 @@ class Civilite
     private $genre;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Contact::class, inversedBy="civilites")
+     * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="civilite")
      */
     private $contacts;
 
@@ -63,6 +63,7 @@ class Civilite
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts[] = $contact;
+            $contact->setCivilite($this);
         }
 
         return $this;
@@ -70,7 +71,12 @@ class Civilite
 
     public function removeContact(Contact $contact): self
     {
-        $this->contacts->removeElement($contact);
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getCivilite() === $this) {
+                $contact->setCivilite(null);
+            }
+        }
 
         return $this;
     }

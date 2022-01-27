@@ -44,16 +44,24 @@ class Contact
      */
     private $content;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Civilite::class, mappedBy="contacts")
-     */
-    private $civilites;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Motif::class, inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $motif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Civilite::class, inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $civilite;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -125,32 +133,6 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return Collection|Civilite[]
-     */
-    public function getCivilites(): Collection
-    {
-        return $this->civilites;
-    }
-
-    public function addCivilite(Civilite $civilite): self
-    {
-        if (!$this->civilites->contains($civilite)) {
-            $this->civilites[] = $civilite;
-            $civilite->addContact($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCivilite(Civilite $civilite): self
-    {
-        if ($this->civilites->removeElement($civilite)) {
-            $civilite->removeContact($this);
-        }
-
-        return $this;
-    }
 
     public function getMotif(): ?Motif
     {
@@ -160,6 +142,30 @@ class Contact
     public function setMotif(?Motif $motif): self
     {
         $this->motif = $motif;
+
+        return $this;
+    }
+
+    public function getCivilite(): ?Civilite
+    {
+        return $this->civilite;
+    }
+
+    public function setCivilite(?Civilite $civilite): self
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

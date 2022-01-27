@@ -23,6 +23,8 @@
 					<p>{{ evenement.content }}</p>
 					<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>
 					<a href="{{ path('event_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier l'évènement</a>
+					<a href="{{ path('event_remove', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer l'évènement</a>
+
 				</div>
 			</article>
 		{% endfor %}
@@ -48,6 +50,7 @@
 					<p>{{ actualite.content }}</p>
 					<a href="{{ path('actuality_show', {'id': actualite.id}) }}" class="btn btn-primary">Lire la suite</a>
 					<a href="{{ path('actuality_edit', {'id': actualite.id}) }}" class="btn btn-primary">Modifier l'actualité</a>
+					<a href="{{ path('actuality_remove', {'id': actualite.id}) }}" class="btn btn-danger">Supprimer l'actualité</a>
 				</div>
 			</article>
 		{% endfor %}
