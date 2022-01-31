@@ -2,26 +2,35 @@
 
 {% block body %}
 	<h1>Prendre contact</h1>
-	{% form_theme formContact 'bootstrap_4_layout.html.twig' %}
+	<div class="row">
+		<div class="col-md-6">
 
-	{{ form_start(formContact) }}
+			{% form_theme formContact 'bootstrap_4_layout.html.twig' %}
+		
+			{{ form_start(formContact) }}
+		
+			<input class="form-check-input" type="" name="flexRadioDefault" id="flexRadioDefault1">
+			<label class="form-check-label" for="flexRadioDefault1">
+				{{ form_row(formContact.civilite) }}
+			</label>
+		
+			{{ form_row(formContact.nom) }}
+			{{ form_row(formContact.prenom) }}
+			{{ form_row(formContact.telephone) }}
+			{{ form_row(formContact.eMail) }}
+			{{ form_row(formContact.content) }}
+			{{ form_row(formContact.motif) }}
+			{# {{ form_widget(formContact) }} #}
+		
+			<br>
+			<button type="submit" class="btn btn-primary">
+				Envoyer
+			</button>
+			{{ form_end(formContact) }}
+		</div>
+		<div class="col-md-4 ms-auto">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8841.365294380577!2d6.036195700972798!3d48.79041144609639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4794ba2d1318b43b%3A0x60e0d84ae4af3749!2s54380%20Saizerais!5e0!3m2!1sfr!2sfr!4v1643636665173!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-	<input class="form-check-input" type="" name="flexRadioDefault" id="flexRadioDefault1">
-	<label class="form-check-label" for="flexRadioDefault1">
-		{{ form_row(formContact.civilite) }}
-	</label>
-
-	{{ form_row(formContact.nom) }}
-	{{ form_row(formContact.prenom) }}
-	{{ form_row(formContact.telephone) }}
-	{{ form_row(formContact.eMail) }}
-	{{ form_row(formContact.content) }}
-	{{ form_row(formContact.motif) }}
-	{# {{ form_widget(formContact) }} #}
-
-	<br>
-	<button type="submit" class="btn btn-primary">
-		Envoyer
-	</button>
-	{{ form_end(formContact) }}
+		</div>
+	</div>
 {% endblock %}
