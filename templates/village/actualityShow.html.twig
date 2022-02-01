@@ -4,9 +4,7 @@
 	<article class="row align-items-start">
 		<h2>{{ actualite.title }}</h2>
 		<div class="metadata">Ecrit le
-			{{ actualite.createdAt | date('d/m/Y') }}
-			à
-			{{ actualite.createdAt | date('H:i') }}
+			{{ actualite.createdAt | date('d/m/Y à H:i') }}			
 		</div>
 		<div class="content">
 			<img src="{{ actualite.image }}" alt="">

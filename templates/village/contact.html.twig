@@ -1,6 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+<!-- Si il n'y a aucune prise de contact -->
+{% if contacts == null %}
+<h1>Aucun Message</h1>
+{% endif %}
+	<!-- Boucle for pour affiché tous les contacts reçus -->
 	{% for contact in contacts %}
 		<article class="row align-items-start">
 			<h2 class="text-center">{{ contact.motif.title }}</h2>
@@ -11,6 +16,9 @@
 				<br>
 				<strong class="text-success">e-mail :</strong>
 				{{ contact.eMail }}
+				<br>
+				<strong class="text-success">tél :</strong>
+				{{ contact.telephone }}
 			</div>
 			<div class="content">
 				<h3>Message:</h3>

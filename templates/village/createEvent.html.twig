@@ -4,6 +4,7 @@
 	{% form_theme formEvenement 'bootstrap_4_layout.html.twig' %}
 
 	<h1>
+		<!-- Boucle if pour afficher le titre différent si on est en modification ou création -->
 		{% if editModeEvent %}
 			Modification de l'évènement
 		{% else %}
@@ -17,6 +18,7 @@
 	{{ form_row(formEvenement.image) }}
 	<br>
 	<button type="submit" class="btn btn-primary">
+		<!-- Boucle if pour afficher le texte différent si on est en modification ou création -->
 		{% if editModeEvent %}
 			Modifier l'évènement
 		{% else %}

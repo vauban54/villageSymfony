@@ -4,58 +4,79 @@
 	
 
 	{# <header class="text-center text-white " style="background: url(/images/IMG_7528-1024x769.jpg);background-size: cover;">jyed</header> #}
-		<section class="container" id="photoAccueil" > 
-			<h1 class="text-center">Accueil</h1>
-			<img src="/images/IMG_7528-1024x769.jpg" class="img-fluid rounded mx-auto d-block" with="auto" alt="..." style="background-size: cover;">
-	</section>
-
-	<section class="articles">
-		<h1>Evènements</h1>
-		<br>
-		{% for evenement in evenements %}
-			<article class="row align-items-start">
-				<h2>{{ evenement.title }}</h2>
-				<div class="metadata">Ecrit le
-					{{ evenement.createdAt | date('d/m/Y') }}
-					à
-					{{ evenement.createdAt | date('H:i') }}
+		
+	
+			<h1 class="text-center">Accueil</h1>			
+			<div class="row">
+				<!-- Photo du village -->
+				<div class="col-md-11">
+					<img src="/images/IMG_7528-1024x769.jpg" class="img-fluid rounded mx-auto d-block" with="auto" alt="..."
+						style="background-size: cover;">
 				</div>
-				<div class="content">
-					<img src="{{ evenement.image }}" alt="">
-					<p>{{ evenement.content }}</p>
-					<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>
-					<a href="{{ path('event_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier l'évènement</a>
-					<a href="{{ path('event_remove', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer l'évènement</a>
-
+				<!-- Widget météo -->
+				<div class="col-md-1">
+					<iframe id="widget_autocomplete_preview" width="150" height="300" frameborder="0"
+						src="https://meteofrance.com/widget/prevision/544900"> </iframe>
 				</div>
-			</article>
-		{% endfor %}
-
-
-	</section>
-
-	<hr>
-	<br>
-	<section class="articles">
-		<h1>Actualités</h1>
-		<br>
-		{% for actualite in actualites %}
-			<article class="row align-items-start">
-				<h2>{{ actualite.title }}</h2>
-				<div class="metadata">Ecrit le
-					{{ actualite.createdAt | date('d/m/Y') }}
-					à
-					{{ actualite.createdAt | date('H:i') }}
-				</div>
-				<div class="content">
-					<img src="{{ actualite.image }}" alt="">
-					<p>{{ actualite.content }}</p>
-					<a href="{{ path('actuality_show', {'id': actualite.id}) }}" class="btn btn-primary">Lire la suite</a>
-					<a href="{{ path('actuality_edit', {'id': actualite.id}) }}" class="btn btn-primary">Modifier l'actualité</a>
-					<a href="{{ path('actuality_remove', {'id': actualite.id}) }}" class="btn btn-danger">Supprimer l'actualité</a>
-				</div>
-			</article>
-		{% endfor %}
-	</section>
+			</div>
+			
+			<!-- Section des évènement -->
+			<section class="articles">
+				<h1>Evènements</h1>
+				<br>
+				<!-- Boucle for pour affiché chaque évènement -->
+				{% for evenement in evenements %}
+				<article class="row align-items-start">
+					<h2>{{ evenement.title }}</h2>
+					<div class="metadata">Ecrit le
+						{{ evenement.createdAt | date('d/m/Y') }}
+						à
+						{{ evenement.createdAt | date('H:i') }}
+					</div>
+					<div class="content">
+						<img src="{{ evenement.image }}" alt="">
+						<p>{{ evenement.content }}</p>
+						<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>
+						<!-- Update et Delete visible uniquement si connecter -->
+						{% if app.user %}
+						<a href="{{ path('event_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier l'évènement</a>
+						<a href="{{ path('event_remove', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer l'évènement</a>
+						{% endif %}
+			
+					</div>
+				</article>
+				{% endfor %}
+			
+			
+			</section>
+			
+			<hr>
+			<br>
+			<!-- Section des Actualités -->
+			<section class="articles">
+				<h1>Actualités</h1>
+				<br>
+				<!-- Boucle for pour affiché chaque actualité -->
+				{% for actualite in actualites %}
+				<article class="row align-items-start">
+					<h2>{{ actualite.title }}</h2>
+					<div class="metadata">Ecrit le
+						{{ actualite.createdAt | date('d/m/Y à H:i') }}
+					</div>
+					<div class="content">
+						<img src="{{ actualite.image }}" alt="">
+						<p>{{ actualite.content }}</p>
+						<a href="{{ path('actuality_show', {'id': actualite.id}) }}" class="btn btn-primary">Lire la suite</a>
+						<!-- Update et Delete visible uniquement si connecter -->
+						{% if app.user %}
+						<a href="{{ path('actuality_edit', {'id': actualite.id}) }}" class="btn btn-primary">Modifier
+							l'actualité</a>
+						<a href="{{ path('actuality_remove', {'id': actualite.id}) }}" class="btn btn-danger">Supprimer
+							l'actualité</a>
+						{% endif %}
+					</div>
+				</article>
+				{% endfor %}
+			</section>
 
 {% endblock %}

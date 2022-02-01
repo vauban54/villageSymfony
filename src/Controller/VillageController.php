@@ -77,7 +77,7 @@ class VillageController extends AbstractController
             ]);
         }
 
-        dump($evenement);
+        // dump($evenement);
 
         return $this->render('village/createEvent.html.twig', [
             'formEvenement' => $formEvenement->createView(),
@@ -149,7 +149,7 @@ class VillageController extends AbstractController
             ]);
         }
 
-        dump($actualite);
+        // dump($actualite);
 
         return $this->render('village/createActuality.html.twig', [
             'formActualite' => $formActualite->createView(),
@@ -218,7 +218,7 @@ class VillageController extends AbstractController
             ]);
         }
 
-        dump($contact);
+        // dump($contact);
 
         return $this->render('village/takeContact.html.twig', [
             'formContact' => $formContact->createView(),

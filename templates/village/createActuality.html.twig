@@ -4,6 +4,7 @@
 	{% form_theme formActualite 'bootstrap_4_layout.html.twig' %}
 
 	<h1>
+		<!-- Boucle if pour afficher le titre différent si on est en modification ou création -->
 		{% if editMode %}
 			Modification de l'actualité
 		{% else %}
@@ -17,6 +18,7 @@
 	{{ form_row(formActualite.image) }}
 	<br>
 	<button type="submit" class="btn btn-primary">
+		<!-- Boucle if pour afficher le texte différent si on est en modification ou création -->
 		{% if editMode %}
 			Modifier l'actualité
 		{% else %}

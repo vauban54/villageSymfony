@@ -3,21 +3,20 @@
 {% block body %}
 	<h1>Evènements</h1>
 	<section class="articles">
+				<!-- Boucle for pour affiché chaque évènement -->
 		{% for evenement in evenements %}
 			<article class="row align-items-start">
 				<h2>{{ evenement.title }}</h2>
 				<div class="metadata">Ecrit le
-					{{ evenement.createdAt | date('d/m/Y') }}
-					à
-					{{ evenement.createdAt | date('H:i') }}
+					{{ evenement.createdAt | date('d/m/Y à H:i') }}					
 				</div>
 				<div class="content">
 					<img src="{{ evenement.image }}" alt="">
 					<p>{{ evenement.content }}</p>
-					<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>
+					<a href="{{ path('event_show', {'id': evenement.id}) }}" class="btn btn-primary">Lire la suite</a>				
 					<a href="{{ path('event_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier l'évènement</a>
-					<a href="{{ path('event_remove', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer l'évènement</a>
-
+					<a href="{{ path('event_remove', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer l'évènement</a>				
+					
 				</div>
 			</article>
 		{% endfor %}

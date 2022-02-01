@@ -2,7 +2,7 @@
 
 {% block body %}
 	<h1>Contact reçus</h1>
-
+	
 	<article class="row align-items-start">
 		<h2>{{ contact.motif.title }}</h2>
 		<div class="metadata">Ecrit par
@@ -12,21 +12,24 @@
 			<br>
 			<strong class="text-success">e-mail :</strong>
 			{{ contact.eMail }}
+			<br>
+			<strong class="text-success">tél :</strong>
+			{{ contact.telephone }}
 		</div>
 		<div class="content">
 			<h3>Message:</h3>
 			<div class="alert alert-warning" role="alert">
 				<p>{{ contact.content }}</p>
 			</div>
-
-
-			{# <a href="{{ path('contact_show', {'id': contact.id}) }}" class="btn btn-primary">Lire la suite</a> #}
-			<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">Modifier</a>
+			<!-- Update visible uniquement si on est pas connecter -->
+			{% if not app.user %}
+			<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">Modifier</a>				
+			{% endif %}
 			<a href="{{ path('contact_remove', {'id': contact.id}) }}" class="btn btn-danger">Supprimer</a>
-
+	
 		</div>
 		<hr>
-
+	
 		<div class="metadata">le
 			{{ contact.createdAt | date('d/m/Y à H:i') }}
 		</div>
