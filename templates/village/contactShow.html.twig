@@ -25,7 +25,10 @@
 			{% if not app.user %}
 			<a href="{{ path('contact_edit', {'id': contact.id}) }}" class="btn btn-primary">Modifier</a>				
 			{% endif %}
+			<!-- Delete visible uniquement si on est connecter -->
+			{% if app.user %}				
 			<a href="{{ path('contact_remove', {'id': contact.id}) }}" class="btn btn-danger">Supprimer</a>
+			{% endif %}
 	
 		</div>
 		<hr>
