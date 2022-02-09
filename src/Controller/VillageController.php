@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Flex\Response as FlexResponse;
+
 
 class VillageController extends AbstractController
 {
@@ -37,6 +37,7 @@ class VillageController extends AbstractController
         return $this->render('village/index.html.twig', [
             // Je crée les variables correspondante à mes repository
             'evenements' => $evenements,
+            'i' => 0,            
             'actualites' => $actualites
         ]);
     }
@@ -66,6 +67,7 @@ class VillageController extends AbstractController
     {
         return $this->render('village/actualityShow.html.twig', [
             'actualite' => $actualite
+
         ]);
     }
     
