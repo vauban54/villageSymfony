@@ -9,10 +9,12 @@ use App\Form\ActualityType;
 use App\Form\ContactType;
 use App\Form\EventType;
 use App\Repository\ActualiteRepository;
+use App\Repository\AdminRepository;
 use App\Repository\ContactRepository;
 use App\Repository\EvenementRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -29,13 +31,16 @@ class VillageController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(EvenementRepository $repoEvent, ActualiteRepository $repoActuality): Response
+    public function index(EvenementRepository $repoEvent, ActualiteRepository $repoActuality, AdminRepository $repoAdmin): Response
     {
         $evenements = $repoEvent->findAll();
 
         $actualites = $repoActuality->findAll();
+
+        $admins = $repoAdmin->findAll();
         return $this->render('village/index.html.twig', [
             // Je crée les variables correspondante à mes repository
+            'admins' => $admins,
             'evenements' => $evenements,
             'i' => 0,            
             'actualites' => $actualites
@@ -43,10 +48,15 @@ class VillageController extends AbstractController
     }
 
     /**
-     * @Route("/histoire", name="history")
+     * @Route("/admin/histoire", name="history")
      */
     public function history(): Response
     {
+        // Si on est pas connecter on redirige vers la page de connexion
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('village/histoire.html.twig');
     }
         

@@ -47,12 +47,12 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact/admin", name="contact")
      */
     public function contact(ContactRepository $repoContact): Response
     {
         // Si on est pas connecter on redirige vers la page de connexion
-        if (!$this->getUser()) {
+        if (!$this->getUser()->getRoles()) {
             return $this->redirectToRoute('app_login');
         }
 
